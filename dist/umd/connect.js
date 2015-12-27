@@ -1,23 +1,21 @@
 (function (global, factory) {
     if (typeof define === 'function' && define.amd) {
-        define(['exports', 'module', 'virtual-element', 'redux', 'is-equal-shallow', 'is-plain-object', 'invariant'], factory);
+        define(['exports', 'module', 'redux', 'is-equal-shallow', 'is-plain-object', 'invariant'], factory);
     } else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
-        factory(exports, module, require('virtual-element'), require('redux'), require('is-equal-shallow'), require('is-plain-object'), require('invariant'));
+        factory(exports, module, require('redux'), require('is-equal-shallow'), require('is-plain-object'), require('invariant'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, mod, global.element, global.redux, global.shallowEquals, global.isPlainObject, global.invariant);
+        factory(mod.exports, mod, global.redux, global.shallowEquals, global.isPlainObject, global.invariant);
         global.connect = mod.exports;
     }
-})(this, function (exports, module, _virtualElement, _redux, _isEqualShallow, _isPlainObject, _invariant) {
+})(this, function (exports, module, _redux, _isEqualShallow, _isPlainObject, _invariant) {
     'use strict';
 
     var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-    var _element = _interopRequireDefault(_virtualElement);
 
     var _shallowEquals = _interopRequireDefault(_isEqualShallow);
 
@@ -158,7 +156,8 @@
 
                     (0, _invariant2['default'])((0, _isPlainObject2['default'])(componentProps), '[deku-redux][connect] `mergeProps` function didn\'t return a plain object.');
 
-                    return (0, _element['default'])(Component, componentProps);
+                    // <Component {...componentProps} />
+                    return { type: Component, children: props.children, attributes: componentProps };
                 }
             };
 

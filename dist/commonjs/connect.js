@@ -8,10 +8,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _virtualElement = require('virtual-element');
-
-var _virtualElement2 = _interopRequireDefault(_virtualElement);
-
 var _redux = require('redux');
 
 var _isEqualShallow = require('is-equal-shallow');
@@ -159,7 +155,8 @@ function connect() {
 
                 (0, _invariant2['default'])((0, _isPlainObject2['default'])(componentProps), '[deku-redux][connect] `mergeProps` function didn\'t return a plain object.');
 
-                return (0, _virtualElement2['default'])(Component, componentProps);
+                // <Component {...componentProps} />
+                return { type: Component, children: props.children, attributes: componentProps };
             }
         };
 
